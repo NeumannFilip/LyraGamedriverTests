@@ -2,7 +2,7 @@
 
 
 
-This repository contains a C\\# automated test suite, implemented using the GameDriver framework for the Lyra Starter Game on Unreal Engine 5.3.
+This repository contains a C# automated test suite, implemented using the GameDriver framework for the Lyra Starter Game on Unreal Engine 5.3.
 
 
 
