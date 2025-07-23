@@ -116,7 +116,7 @@ To ensure every test works as intended, the following modifications are necessar
 
 **Important** 1. The gdio libraries are not public NuGet Packages. Thus add them as a direct refereneces to the `.dll` files. The `.dll` files are bundled inside the `.zip` after clicking download "Unreal API Releases" on GameDriver Download section - Install Unreal Version 5.x. In that folder you can find all `.dll` files that should be references in Visual Studio. The final structure of files should look like this.
 
-![Image of file structure in solution explorer]"dependencies.png"](https://github.com/NeumannFilip/LyraGamedriverTests/blob/master/dependencies.png)
+!["dependencies.png"](https://github.com/NeumannFilip/LyraGamedriverTests/blob/master/dependencies.png)
 
 **If you ever have a chances to work with these libraries and Visual Studio is throwing errors regarding these libraries. Simply remove and re-add them by right-click on "dependencies" -> left-click "Add Project Reference".**
 
