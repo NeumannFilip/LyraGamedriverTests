@@ -1,4 +1,4 @@
-\# Lyra Test Automation Suite using GameDriver
+# Lyra Test Automation Suite using GameDriver
 
 
 
@@ -14,7 +14,7 @@ The project includes a set of smoke tests and a custom helper method designed to
 
 
 
-\## 1\\. Smoke Test Suite Rundown
+## 1\. Smoke Test Suite Rundown
 
 
 
@@ -46,11 +46,11 @@ The tests replicate and verify the usual user path in the following order:
 
 
 
-\## 2\\. AimAtTarget Helper Method: The Challenge and Solution
+## 2\. AimAtTarget Helper Method: The Challenge and Solution
 
 
 
-\### The Challenge: Unreal's Enhanced Input System
+### The Challenge: Unreal's Enhanced Input System
 
 
 
@@ -58,7 +58,7 @@ Newer versions of Unreal Engine introduced a new input system called the "Enhanc
 
 
 
-\### Solution 1: Triggering Actions by Path
+### Solution 1: Triggering Actions by Path
 
 
 
@@ -66,17 +66,17 @@ To reliably trigger actions (e.g., Jump), a custom function `TriggerActionByPath
 
 
 
-\*\*Breakdown:\*\*
+**Breakdown:**
 
 
 
-1\.  The C\\# test calls `TriggerActionByPath` via `api.CallMethod`, passing the path of an `InputAction` asset (e.g., "/Game/Input/Actions/IA\\\_Jump.IA\\\_Jump").
+1\.  The C# test calls `TriggerActionByPath` via `api.CallMethod`, passing the path of an `InputAction` asset (e.g., "/Game/Input/Actions/IA\\\_Jump.IA\\\_Jump").
 
 2\.  `TriggerActionByPath` loads and processes it via `InjectInputForAction`.
 
 
 
-\### Solution 2: Direct Player View Rotation
+### Solution 2: Direct Player View Rotation
 
 
 
@@ -84,7 +84,7 @@ For aiming, initially, relying solely on `api.RotateObject()` proved unreliable 
 
 
 
-\*\*Breakdown:\*\*
+**Breakdown:**
 
 
 
@@ -100,7 +100,7 @@ For aiming, initially, relying solely on `api.RotateObject()` proved unreliable 
 
 
 
-\## 3\\. Lyra Project Modifications
+## 3\. Lyra Project Modifications
 
 
 
@@ -108,13 +108,13 @@ To ensure every test works as intended, the following modifications are necessar
 
 
 
-1\.  \*\*Installing the GameDriver Plugin:\*\*
+1\.  **Installing the GameDriver Plugin:**
 
 &nbsp;   Follow the official guide to set up the plugin correctly: \[https://kb.gamedriver.io/getting-started-with-gamedriver-and-unreal-engine](https://kb.gamedriver.io/getting-started-with-gamedriver-and-unreal-engine)
 
 
 
-2\.  \*\*Add custom C++ functions to `LyraPlayerController`:\*\*
+2\.  **Add custom C++ functions to `LyraPlayerController`:**
 
 &nbsp;   To enable robust input action tests, the `TriggerActionByPath` and `SetPlayerViewRotation` functions must be added to the `LyraPlayerController`.
 
@@ -210,7 +210,7 @@ To ensure every test works as intended, the following modifications are necessar
 
 
 
-&nbsp;   \*\*Important:\*\* Recompile the Lyra Project after adding this code\\!
+&nbsp;   **Important:** Recompile the Lyra Project after adding this code\\!
 
 
 
@@ -218,7 +218,7 @@ To ensure every test works as intended, the following modifications are necessar
 
 
 
-\## 4\\. How to Configure and Run Tests
+## 4\. How to Configure and Run Tests
 
 
 
@@ -230,7 +230,7 @@ To ensure every test works as intended, the following modifications are necessar
 
 
 
-\### Option 1: Running tests in a packaged build
+### Option 1: Running tests in a packaged build
 
 
 
@@ -248,7 +248,7 @@ To ensure every test works as intended, the following modifications are necessar
 
 
 
-\### Option 2: Running tests in Editor
+### Option 2: Running tests in Editor
 
 
 
@@ -264,7 +264,7 @@ To ensure every test works as intended, the following modifications are necessar
 
 
 
-\*\*Disclaimer when working within Editor:\*\*
+**Disclaimer when working within Editor:**
 
 Due to the fact that tests are working at the speed of the computer, sometimes there might be flaky tests. To solve the issue of timings and loadings, the waiting times have been increased to make tests a little more patient. While not the most optimal method, it allows for safer and more reliable testing results. Please look for the `MapsToExperienceSelection` helper method and the "//If in Editor" comment, and uncomment the longer `Thread.Sleep()`. If the sleep is too short before `api.ClickObject(MouseButtons.LEFT, StartGameButton, 1);`, the test might fail.
 
@@ -274,11 +274,11 @@ Due to the fact that tests are working at the speed of the computer, sometimes t
 
 
 
-\## Sources
+## Sources
 
 
 
-&nbsp; \* \*\*GameDriver documentation:\*\*
+&nbsp; \* **GameDriver documentation:**
 
 
 
@@ -288,7 +288,7 @@ Due to the fact that tests are working at the speed of the computer, sometimes t
 
 
 
-&nbsp; \* \*\*Epic Games Unreal Engine documentation:\*\*
+&nbsp; \* **Epic Games Unreal Engine documentation:**
 
 
 
@@ -298,9 +298,8 @@ Due to the fact that tests are working at the speed of the computer, sometimes t
 
 
 
-&nbsp; \* \*\*NUnit Documentation:\*\*
+&nbsp; \* **NUnit Documentation:**
 
 
 
 &nbsp;     \* \[https://docs.nunit.org/articles/nunit/intro.html](https://docs.nunit.org/articles/nunit/intro.html)
-
