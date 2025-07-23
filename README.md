@@ -22,7 +22,7 @@ Smoke tests are designed to perform a quick validation of a new Lyra game build.
 
 
 
-This suite is structured using independent tests that rely on shared helper methods (`MapsToMainMenu`, `MapsToExperienceSelection`, `StartMatch`) to ensure test isolation and avoid code duplication. This best practice prevents a single failure from cascading.
+This suite is structured using independent tests that rely on shared helper methods (`MapsToMainMenu`, `MapsToExperienceSelection`, `StartMatch`) to ensure test isolation and avoid code duplication.
 
 
 
@@ -223,20 +223,6 @@ To ensure every test works as intended, the following modifications are necessar
 
 
 1\.  Clone this repository to your local machine.
-
-
-
-1\.  Clone this repository to your local machine.
-
-&nbsp;   gdio libraries are not public NuGet Packages. Thus add them as a direct refereneces to the `.dll` files. The `.dll` files are bundled inside the `.zip` after clicking download "Unreal API Releases" on GameDriver Download section - Install Unreal Version 5.x. In that folder you can find all `.dll` files that should be references in Visual Studio. The final structure of files should look like this.
-
-
-
-!\[Image of file structure in solution explorer]"dependencies.png"
-
-
-
-If you ever have a chances to work with these libraries and Visual Studio is throwing errors regarding these libraries. Simply remove and re-add them.
 
 2\.  Open the Lyra project and add the C++ functions to `LyraPlayerController` as described in the section above, then recompile the project.
 
