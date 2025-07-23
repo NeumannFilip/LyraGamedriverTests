@@ -147,13 +147,13 @@ void ALyraPlayerController::TriggerInputActionByPath(const FString\& ActionPath)
     UInputAction\* LoadedInputAction = LoadObject<UInputAction>(nullptr, \*ActionPath);
     if (!LoadedInputAction)
     {
-    UE\_LOG(LogTemp, Error, TEXT("Automation: Could not find InputAction at path: %s"), \*ActionPath);
-    return;
+      UE\_LOG(LogTemp, Error, TEXT("Automation: Could not find InputAction at path: %s"), \*ActionPath);
+      return;
     }
   
     if (UEnhancedPlayerInput\* EIP = Cast<UEnhancedPlayerInput>(this->PlayerInput))
     {
-     EIP->InjectInputForAction(LoadedInputAction, FInputActionValue(true));
+       EIP->InjectInputForAction(LoadedInputAction, FInputActionValue(true));
     }
   }
 
@@ -163,7 +163,6 @@ void ALyraPlayerController::TriggerInputActionByPath(const FString\& ActionPath)
     //Convert FVector to FRotator
     FRotator NewRotation = FRotator(EulerRotation.X, EulerRotation.Y, EulerRotation.Z);
     SetControlRotation(NewRotation);
-  
   }
 ```
 
@@ -187,9 +186,9 @@ void ALyraPlayerController::TriggerInputActionByPath(const FString\& ActionPath)
 
 **Important:** The gdio libraries are not public NuGet Packages. Thus add them as a direct refereneces to the `.dll` files. The `.dll` files are bundled inside the `.zip` after clicking download "Unreal API Releases" on GameDriver Download section - Install Unreal Version 5.x. In that folder you can find all `.dll` files that should be references in Visual Studio. The final structure of files should look like this.
 
-!(dependencies.png)
+![dependencies.png](https://github.com/NeumannFilip/LyraGamedriverTests/blob/master/dependencies.png)
 
-If you ever have a chances to work with these libraries and Visual Studio is throwing errors regarding these libraries. Simply remove and re-add them.
+**If you ever have a chances to work with these libraries and Visual Studio is throwing errors regarding these libraries. Simply remove and re-add them.**
 
 
 ### Option 1: Running tests in a packaged build
