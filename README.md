@@ -123,19 +123,12 @@ To ensure every test works as intended, the following modifications are necessar
 &nbsp;   In `LyraPlayerController.h`, add:
 
 ```
-&nbsp;   //Necessary for injecting input to trigger EIS
-
-&nbsp;   UFUNCTION(BlueprintCallable, Category = "Automation")
-
-&nbsp;   void TriggerInputActionByPath(const FString\& ActionPath);
-
-
-
-&nbsp;   //Necessary to determine player's rotation
-
-&nbsp;   UFUNCTION(BlueprintCallable, Category = "Automation")
-
-&nbsp;   void SetPlayerViewRotation(FVector EulerRotation);
+  //Necessary for injecting input to trigger EIS
+  UFUNCTION(BlueprintCallable, Category = "Automation")
+  void TriggerInputActionByPath(const FString\& ActionPath);
+  //Necessary to determine player's rotation
+  UFUNCTION(BlueprintCallable, Category = "Automation")
+  void SetPlayerViewRotation(FVector EulerRotation);
 ```
 
 
@@ -143,61 +136,35 @@ To ensure every test works as intended, the following modifications are necessar
 &nbsp;   In `LyraPlayerController.cpp`, add:
 
 ```
-&nbsp;   //Necessary includes to add at the top of the .cpp file
+//Necessary includes to add at the top of the .cpp file
+#include "EnhancedInputSubsystems.h"
+#include "InputMappingContext.h"
+#include "EnhancedPlayerInput.h"
+#include "InputAction.h"
 
-&nbsp;   #include "EnhancedInputSubsystems.h"
-
-&nbsp;   #include "InputMappingContext.h"
-
-&nbsp;   #include "EnhancedPlayerInput.h"
-
-&nbsp;   #include "InputAction.h"
-
-
-
-&nbsp;   void ALyraPlayerController::TriggerInputActionByPath(const FString\& ActionPath)
-
-&nbsp;   {
-
-&nbsp;       UInputAction\* LoadedInputAction = LoadObject<UInputAction>(nullptr, \*ActionPath);
-
-
-
-&nbsp;       if (!LoadedInputAction)
-
-&nbsp;       {
-
-&nbsp;           UE\_LOG(LogTemp, Error, TEXT("Automation: Could not find InputAction at path: %s"), \*ActionPath);
-
-&nbsp;           return;
-
-&nbsp;       }
+void ALyraPlayerController::TriggerInputActionByPath(const FString\& ActionPath)
+  {
+    UInputAction\* LoadedInputAction = LoadObject<UInputAction>(nullptr, \*ActionPath);
+    if (!LoadedInputAction)
+    {
+    UE\_LOG(LogTemp, Error, TEXT("Automation: Could not find InputAction at path: %s"), \*ActionPath);
+    return;
+    }
+  
+    if (UEnhancedPlayerInput\* EIP = Cast<UEnhancedPlayerInput>(this->PlayerInput))
+    {
+     EIP->InjectInputForAction(LoadedInputAction, FInputActionValue(true));
+    }
+  }
 
 
-
-&nbsp;       if (UEnhancedPlayerInput\* EIP = Cast<UEnhancedPlayerInput>(this->PlayerInput))
-
-&nbsp;       {
-
-&nbsp;           EIP->InjectInputForAction(LoadedInputAction, FInputActionValue(true));
-
-&nbsp;       }
-
-&nbsp;   }
-
-
-
-&nbsp;   void ALyraPlayerController::SetPlayerViewRotation(FVector EulerRotation)
-
-&nbsp;   {
-
-&nbsp;       //Convert FVector to FRotator
-
-&nbsp;       FRotator NewRotation = FRotator(EulerRotation.X, EulerRotation.Y, EulerRotation.Z);
-
-&nbsp;       SetControlRotation(NewRotation);
-
-&nbsp;   }
+  void ALyraPlayerController::SetPlayerViewRotation(FVector EulerRotation)
+  {
+    //Convert FVector to FRotator
+    FRotator NewRotation = FRotator(EulerRotation.X, EulerRotation.Y, EulerRotation.Z);
+    SetControlRotation(NewRotation);
+  
+  }
 ```
 
 
@@ -216,7 +183,7 @@ To ensure every test works as intended, the following modifications are necessar
 
 2\.  Open the Lyra project and add the C++ functions to `LyraPlayerController` as described in the section above, then recompile the project.
 
-3\.  Open the C\\# `LyraGameDriverTests.sln` test project in Visual Studio 2022.
+3\.  Open the C# `LyraGameDriverTests.sln` test project in Visual Studio 2022.
 
 **Important:** The gdio libraries are not public NuGet Packages. Thus add them as a direct refereneces to the `.dll` files. The `.dll` files are bundled inside the `.zip` after clicking download "Unreal API Releases" on GameDriver Download section - Install Unreal Version 5.x. In that folder you can find all `.dll` files that should be references in Visual Studio. The final structure of files should look like this.
 
