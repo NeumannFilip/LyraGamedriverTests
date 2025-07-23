@@ -122,10 +122,7 @@ To ensure every test works as intended, the following modifications are necessar
 
 &nbsp;   In `LyraPlayerController.h`, add:
 
-
-
-&nbsp;   ```cpp
-
+```
 &nbsp;   //Necessary for injecting input to trigger EIS
 
 &nbsp;   UFUNCTION(BlueprintCallable, Category = "Automation")
@@ -139,17 +136,13 @@ To ensure every test works as intended, the following modifications are necessar
 &nbsp;   UFUNCTION(BlueprintCallable, Category = "Automation")
 
 &nbsp;   void SetPlayerViewRotation(FVector EulerRotation);
-
-&nbsp;   ```
+```
 
 
 
 &nbsp;   In `LyraPlayerController.cpp`, add:
 
-
-
-&nbsp;   ```cpp
-
+```
 &nbsp;   //Necessary includes to add at the top of the .cpp file
 
 &nbsp;   #include "EnhancedInputSubsystems.h"
@@ -205,9 +198,7 @@ To ensure every test works as intended, the following modifications are necessar
 &nbsp;       SetControlRotation(NewRotation);
 
 &nbsp;   }
-
-&nbsp;   ```
-
+```
 
 
 &nbsp;   **Important:** Recompile the Lyra Project after adding this code\\!
@@ -221,13 +212,17 @@ To ensure every test works as intended, the following modifications are necessar
 ## 4\. How to Configure and Run Tests
 
 
-
 1\.  Clone this repository to your local machine.
 
 2\.  Open the Lyra project and add the C++ functions to `LyraPlayerController` as described in the section above, then recompile the project.
 
 3\.  Open the C\\# `LyraGameDriverTests.sln` test project in Visual Studio 2022.
 
+**Important:** The gdio libraries are not public NuGet Packages. Thus add them as a direct refereneces to the `.dll` files. The `.dll` files are bundled inside the `.zip` after clicking download "Unreal API Releases" on GameDriver Download section - Install Unreal Version 5.x. In that folder you can find all `.dll` files that should be references in Visual Studio. The final structure of files should look like this.
+
+!(dependencies.png)
+
+If you ever have a chances to work with these libraries and Visual Studio is throwing errors regarding these libraries. Simply remove and re-add them.
 
 
 ### Option 1: Running tests in a packaged build
