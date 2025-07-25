@@ -64,7 +64,7 @@ To ensure every test works as intended, the following modifications are necessar
     ```cpp
     //Necessary for injecting input to trigger EIS
     UFUNCTION(BlueprintCallable, Category = "Automation")
-    void TriggerInputActionByPath(const FString& ActionPath);
+    void TriggerActionByPath(const FString& ActionPath);
 
     //Necessary to determine player's rotation
     UFUNCTION(BlueprintCallable, Category = "Automation")
@@ -80,20 +80,20 @@ To ensure every test works as intended, the following modifications are necessar
     #include "EnhancedPlayerInput.h"
     #include "InputAction.h"
 
-    void ALyraPlayerController::TriggerInputActionByPath(const FString& ActionPath)
+    void ALyraPlayerController::TriggerActionByPath(const FString& ActionPath)
     {
-        UInputAction* LoadedInputAction = LoadObject<UInputAction>(nullptr, *ActionPath);
+	    UInputAction* LoadedInputAction = LoadObject<UInputAction>(nullptr, *ActionPath);
 
-        if (!LoadedInputAction)
-        {
-            UE_LOG(LogTemp, Error, TEXT("Automation: Could not find InputAction at path: %s"), *ActionPath);
-            return;
-        }
+	    if (!LoadedInputAction)
+	    {
+		    UE_LOG(LogTemp, Error, TEXT("Automation: Could not find InputAction at path: %s"), *ActionPath);
+		    return;
+	    }
 
-        if (UEnhancedPlayerInput* EIP = Cast<UEnhancedPlayerInput>(this->PlayerInput))
-        {
-            EIP->InjectInputForAction(LoadedInputAction, FInputActionValue(true));
-        }
+	    if (UEnhancedPlayerInput* EIP = Cast<UEnhancedPlayerInput>(this->PlayerInput))
+	    {
+	    	EIP->InjectInputForAction(LoadedInputAction, FInputActionValue(true));
+	    }
     }
 
     void ALyraPlayerController::SetPlayerViewRotation(FVector EulerRotation)
